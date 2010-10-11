@@ -26,12 +26,13 @@ void cola_float::insertar(float valor){
 }
 
 float cola_float::extraer(){
-  nodo *paux = new nodo();
   if (vacia()) cerr << "No hay elementos" << endl;
   else {
-    paux = primero;
+		float tmp = primero->valor;
+		nodo *old = primero;
     primero = primero->sig;
-    return paux->valor;
+		delete old;
+    return tmp;
   }
   return -1;
 }
