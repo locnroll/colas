@@ -1,5 +1,5 @@
 CC = g++
-CFLAGS = -Wall -Wextra
+CFLAGS = -Wall -Wextra -pedantic -g
 all: main
 
 main: main.cc fqueue.o

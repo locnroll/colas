@@ -17,9 +17,10 @@ void fqueue::insert(float value){
   if (empty()){
     aux->value=value;
     aux->nxt=NULL;
-    first=last=aux;
+    first=last=aux;n=1;
   }
   else {
+    n++;
     aux->value=value;
     aux->nxt=NULL;
     last->nxt=aux;
@@ -27,13 +28,28 @@ void fqueue::insert(float value){
   }
 }
 
+// void fqueue::insertb(float value){ // only insert if value > max(queue)
+//   node *aux = new node();
+//   if (empty()){
+//     aux->value=max=value;
+//     aux->nxt=NULL;
+//     first=last=aux; n=1; 
+//   }
+//   else if(value > max){
+//     aux->value=max=value;
+//     aux->nxt=NULL;
+//     last->nxt=aux;
+//     last=aux;n++;
+//   }
+// }
+
 float fqueue::extract(){
   if (empty()) cerr << "No items to extract" << endl;
   else {
     float tmp = first->value;
     node *old = first;
     first = first->nxt;
-    delete old;
+    delete old; n--;
     return tmp;
   }
   return -1;
@@ -41,6 +57,7 @@ float fqueue::extract(){
 
 bool fqueue::empty() const{
   if (first == 0 && first == 0) return true;
+  // if (!n) return true;
   else return false;
 }
 
@@ -58,6 +75,7 @@ void fqueue::show()const{
 }
 
 fqueue& fqueue::operator<< (float value){
+  // insertb(value);
   insert(value);
   return *this;
 }
@@ -79,5 +97,21 @@ void fqueue::flip(){
   for(i=0;i<n;i++)
     insert(aux[i]); 
 }
-    
+
+void fqueue::sub(){
   
+  int r,s,k,imi,m,ima,t=n;
+  float *v=new float[t];
+  for (int i=0; i<t; i++)
+    v[i]=extract();
+  k=imi=ima=0;m=r=s=0;
+  while (m<t){
+    k=m; while( v[m]<v[m+1])m++;
+    r=m-k+1; if (r > s){s=r;imi=k;ima=m;}
+    m++;
+  }
+  cout << "[";
+  for(int i=imi; i<=ima; i++)
+    cout << " : " << v[i];
+  cout << " : ]" << endl;
+}
