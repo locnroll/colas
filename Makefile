@@ -1,10 +1,10 @@
 CC = g++
-CFLAGS = -Wall -Wextra -pedantic
-all: colas
+CFLAGS = -Wall -Wextra
+all: main
 
-colas: colas.cc cola_float.o
-	$(CC) $(CFLAGS) colas.cc cola_float.o -o colas
+main: main.cc fqueue.o
+	$(CC) $(CFLAGS) main.cc fqueue.o -o main
 
-cola_float.o: cola_float.cc
-	$(CC) -c cola_float.cc
+fqueue.o: fqueue.cc
+	$(CC) -c fqueue.cc
 
